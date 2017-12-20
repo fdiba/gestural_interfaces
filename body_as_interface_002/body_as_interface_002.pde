@@ -8,6 +8,7 @@ PVector com;
 int n_diam;
 int[] scores ={0,0,0,0,0};
 float xPos=0, yPos=0;
+int numFrames=0;
 
 /*
 void init() {
@@ -47,6 +48,7 @@ void checkZone(PVector pos){
   }
   
   if(actual_zone!=previous_zone){
+    numFrames=0;
     scores[actual_zone]++;
     println(scores[0],scores[1],scores[2],scores[3],scores[4]);
     //newEvents(actual_zone);
@@ -87,10 +89,8 @@ void draw(){
     xPos = lerp(xPos, map(com.x, -600., 600., 0, width), 0.3);
     yPos = lerp(yPos, map(com.y, -400., 0., height, 0), 0.3);
     
-    
     /*xPos = lerp(xPos, map(com.x, -500., 500., 0, width), 0.3);
     yPos = lerp(yPos, map(com.y, -200., 0., height, 0), 0.3);*/
-    
     
   } else {
     xPos=mouseX;
@@ -102,6 +102,8 @@ void draw(){
   
   if(actual_zone!=0)drawBlackHole();
   
+  numFrames++;
+  
   drawScores();
   
   ellipse(xPos,yPos,50,50);
@@ -109,14 +111,17 @@ void draw(){
   textAlign(LEFT);
   fill(255);
   textSize(30);
-  String str = "x: "+ (int)xPos + " y: " + (int)yPos;
-  text(str, 50, 50);
+  String str1 = "x: "+ (int)xPos + " y: " + (int)yPos;
+  text(str1, 50, 50);
+  String str2 = "numFrames: "+ numFrames;
+  text(str2, 50, 90);
   
   tint(255, 127);
   if(context.depthImage()!=null)image(context.depthImage(),0,0);
   tint(255,0);
   
 }
+//------------- draw functions ---------------//
 void drawBlackHole(){
   noStroke();
   fill(0);
@@ -125,7 +130,7 @@ void drawBlackHole(){
 void drawScores(){
   
   textAlign(CENTER, CENTER);
-  fill(127);
+  fill(255);
   textSize(60);
   
   for(int i=0; i<scores.length; i++){
@@ -155,31 +160,29 @@ void drawScores(){
   }
 }
 void drawZones(int id){
-    
+  
+  int alpha = 255;
+  if(numFrames<17)alpha=numFrames*15;
+  noStroke();
   switch(id){
     case 0:
-      noStroke();
-      fill(255);
+      fill(52,73,94,alpha);
       ellipse(width/2, height/2, n_diam, n_diam);
       break;
     case 1:
-      noStroke();
-      fill(255,0,0);
+      fill(26,188,156,alpha);
       rect(0, 0, width/2, height/2);
       break;
     case 2:
-      noStroke();
-      fill(0,255,0);
+      fill(46,204,113,alpha);
       rect(width/2, 0, width/2, height/2);
       break;
     case 3:
-      noStroke();
-      fill(0,0,255);
+      fill(52,152,219,alpha);
       rect(0, height/2, width/2, height/2);
       break;
     case 4:
-      noStroke();
-      fill(255,0,255);
+      fill(155,89,182,alpha);
       rect(width/2, height/2, width/2, height/2);
       break;
     default:
