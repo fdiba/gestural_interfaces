@@ -104,10 +104,11 @@ void draw(){
   
   numFrames++;
   
-  drawScores();
-  
+  fill(127);
   ellipse(xPos,yPos,50,50);
-  
+
+  drawScores();
+    
   textAlign(LEFT);
   fill(255);
   textSize(30);
