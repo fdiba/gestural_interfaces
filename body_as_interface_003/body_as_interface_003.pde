@@ -112,7 +112,7 @@ void draw(){
   fill(127);
   ellipse(xPos,yPos,50,50);
 
-  drawScores();
+  
     
   textAlign(LEFT);
   fill(255);
@@ -126,6 +126,8 @@ void draw(){
   if(context.depthImage()!=null)image(context.depthImage(),0,0);
   tint(255,0);
   
+  drawScores();
+  
 }
 //------------- draw functions ---------------//
 void drawBlackHole(){
@@ -136,27 +138,37 @@ void drawBlackHole(){
 void drawScores(){
   
   textAlign(CENTER, CENTER);
-  fill(255);
-  textSize(60);
+  
+  textSize(30);
+  int alpha=30;
+  color c1 = color(52,73,94,alpha);
   
   for(int i=0; i<scores.length; i++){
     float x = width/2, y = height/2;
     switch(i){
       case 1:
         y -= height/3;
+        c1=color(26,188,156,alpha);
         break;
       case 2:
         x += width/3;
+        c1=color(46,204,113,alpha);
         break;
       case 3:
         y += height/3;
+        c1=color(52,152,219,alpha);
         break;
       case 4:
         x -= width/3;
+        c1=color(155,89,182,alpha);
         break;
       default:
         break;
     } 
+    
+    fill(c1);
+    ellipse(x,y+4,60,60);
+    fill(255);
     String str=str(scores[i]);
     text(str,x,y);
   }
