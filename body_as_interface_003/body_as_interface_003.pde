@@ -89,7 +89,7 @@ void draw(){
   context.update();
   
   int[] userList = context.getUsers();
-  if(userList.length>0 && context.getCoM(userList[0], com)){ 
+  if(userList.length==1 && context.getCoM(userList[0], com)){ 
     //println(com.y);
     xPos = lerp(xPos, map(com.x, -600., 600., 0, width), 0.3);
     yPos = lerp(yPos, map(com.y, -400., 0., height, 0), 0.3);
